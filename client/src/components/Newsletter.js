@@ -21,6 +21,7 @@ const Newsletter = ({isOpen, handleNewsletter}) => {
     return (
         <div className='fixed self-center max-w-[75%] bg-white p-4 rounded'>
             <form onSubmit={handleSubmit} className='flex flex-col'>
+                <button onClick={() => handleNewsletter()} className='absolute top-0 right-0 mr-2'>x</button>
                 <label htmlFor='email' className='font-medium'>Email</label>
                 <input placeholder='Type your email' name='email' onChange={handleChange} className='my-2 border rounded-sm' />
                 <p className='font-medium'>I consent to being contacted by email</p>
