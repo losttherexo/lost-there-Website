@@ -1,6 +1,6 @@
 import './app.css'
 import NavBar from "./components/NavBar";
-import MainPage from './components/MainPage';
+import Landing from './components/Landing';
 import About from './components/About';
 import Blog from './components/Blog'
 import Tour from './components/Tour';
@@ -12,7 +12,7 @@ function App() {
       <NavBar />
       <Switch>
         <Route exact path='/'>
-          <MainPage />
+          <Landing />
         </Route>
         <Route path='/tour'>
           <Tour />
