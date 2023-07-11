@@ -1,12 +1,17 @@
 import { useState } from "react"
 
 const Newsletter = ({isOpen, handleNewsletter}) => {
+    const [email, setEmail] = useState('')
     const [consent, setConsent] = useState(false)
+
+    const handleChange = (e) => {
+        setEmail(e.target.value)
+    }
     
     const handleSubmit = (e) => {
         e.preventDefault()
         handleNewsletter()
-        console.log(e.target.value)
+        console.log(email)
     }
 
     if(!isOpen) {
@@ -17,7 +22,7 @@ const Newsletter = ({isOpen, handleNewsletter}) => {
         <div className='fixed self-center max-w-[75%] bg-white p-4 rounded'>
             <form onSubmit={handleSubmit} className='flex flex-col'>
                 <label htmlFor='email' className='font-medium'>Email</label>
-                <input placeholder='Type your email' name='email' className='my-2 border rounded-sm' />
+                <input placeholder='Type your email' name='email' onChange={handleChange} className='my-2 border rounded-sm' />
                 <p className='font-medium'>I consent to being contacted by email</p>
                 <div className=''>
                     <input onClick={() => setConsent(!consent)} type='checkbox' name='consent' />
