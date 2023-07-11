@@ -6,10 +6,13 @@ const Newsletter = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input  placeholder='e-mail' name='email'/>
-            <input type='submit' className='bg-lime-500'/>
-        </form>
+        <div className='self-center max-w-[30%] bg-white p-4 rounded'>
+            <form onSubmit={handleSubmit} className='flex flex-col'>
+                <p className=''>Email</p>
+                <input placeholder='Type your email' name='email' className='my-2 border' />
+                <input type='submit' className='bg-lime-500 rounded-md my-2' />
+            </form>
+        </div>
     )
 }
 
