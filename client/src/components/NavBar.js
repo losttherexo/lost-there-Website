@@ -21,17 +21,17 @@ const NavBar = () => {
                 <SlMenu size={20}/>
             </button>
             <div className={nav ? 'fixed left-0 top-0 w-[45%] h-full border-r border-stone-400 bg-black ease-in-out duration-500' : 'fixed left-[-100%]'}>
-                <h1 className='w-full medium:text-xl text-3xl font-bold m-4'>
+                <h1 onClick={handleNav} className='w-full medium:text-xl text-3xl font-bold m-4'>
                     <NavLink exact to='/'>lost,there</NavLink>
                 </h1>
                 <ul >
-                    <li className='p-4 border-b border-stone-400'>
+                    <li onClick={handleNav} className='p-4 border-b border-stone-400'>
                         <NavLink to='/tour'>tour</NavLink>
                     </li>
-                    <li className='p-4 border-b border-stone-400'>
+                    <li onClick={handleNav} className='p-4 border-b border-stone-400'>
                         <NavLink to='/blog'>blog</NavLink>
                     </li>
-                    <li className='p-4 border-b border-stone-400'>
+                    <li onClick={handleNav} className='p-4 border-b border-stone-400'>
                         <NavLink to='about'>about</NavLink>
                     </li>
                 </ul>
