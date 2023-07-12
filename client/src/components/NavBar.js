@@ -1,14 +1,29 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {SlMenu} from 'react-icons/sl'
 import {NavLink} from 'react-router-dom'
  
 const NavBar = () => {
     const [nav, setNav] = useState(false)
-
+    
     const handleNav = () => {
         setNav(!nav)
     }
 
+    useEffect(() => {
+        const handleResize = () => {
+            if(window.innerWidth < 768) {
+                setNav(false)
+            }
+        }
+
+        handleResize()
+        window.addEventListener('resize', handleResize)
+
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [])
+    
     return (
         <div className='text-lime-500 flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4'>
             <h1 className='w-full text-4xl font-bold'><NavLink exact to='/'>lost,there</NavLink></h1>
