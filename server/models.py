@@ -1,10 +1,9 @@
-from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy import CheckConstraint
 from datetime import datetime
 from config import db, bcrypt
 
-class Show(db.Model, SerializerMixin):
+class Show(db.Model):
     __tablename__ = 'shows'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -16,3 +15,4 @@ class Show(db.Model, SerializerMixin):
     def __repr__(self):
         return f'Show {self.id} at {self.venue} on {self.date}'
     
+class BlogPost(db.Model):
