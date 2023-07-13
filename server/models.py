@@ -16,3 +16,13 @@ class Show(db.Model):
         return f'Show {self.id} at {self.venue} on {self.date}'
     
 class BlogPost(db.Model):
+    __tablename__ = 'blog_posts'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    publish_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f'Blog Post {self.id}: {self.title}'
+    
