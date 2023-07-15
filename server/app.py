@@ -8,6 +8,10 @@ class Home(Resource):
     def get(self):
         return 'how did i get here?'
     
+class Newsletter(Resource):
+    def post(self):
+        pass
+    
 class Shows(Resource):
     def get(self):
         shows = [s.to_dict() for s in Show.query.all()]
