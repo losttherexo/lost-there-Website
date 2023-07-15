@@ -1,9 +1,9 @@
-from flask import request, make_response, session, abort
+from flask import request, make_response, session, abort, jsonify
 from flask_restful import Resource
 
 from config import app, db, api
 from models import Show, Blog
-
+import requests
 
 class Home(Resource):
     def get(self):
