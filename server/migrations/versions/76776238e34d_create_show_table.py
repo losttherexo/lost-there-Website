@@ -1,8 +1,8 @@
-"""create shows table
+"""create Show table
 
-Revision ID: d81407a2eda6
+Revision ID: 76776238e34d
 Revises: 
-Create Date: 2023-07-15 11:03:08.344126
+Create Date: 2023-07-15 11:33:40.364713
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'd81407a2eda6'
+revision = '76776238e34d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,6 +21,8 @@ def upgrade():
     op.create_table('shows',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('venue', sa.String(length=64), nullable=False),
+    sa.Column('location', sa.String(length=64), nullable=False),
+    sa.Column('date', sa.DateTime(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
