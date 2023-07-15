@@ -1,8 +1,11 @@
 from flask import request, make_response, session, abort, jsonify
 from flask_restful import Resource
 
-from config import app, db, api, marketing_key
+from config import app, db, api, mailchimp
 from models import Show, Blog
+
+response = mailchimp.ping.get()
+print(response)
 
 class Home(Resource):
     def get(self):
@@ -28,7 +31,7 @@ class Blogs(Resource):
 
 api.add_resource(Home, '/')
 api.add_resource(Shows, '/shows')
-api.add_resource(Blog, '/blogs')
+api.add_resource(Blogs, '/blogs')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
