@@ -1,7 +1,7 @@
 from flask import request, make_response, session, abort, jsonify
 from flask_restful import Resource
 
-from config import app, db, api
+from config import app, db, api, marketing_key
 from models import Show, Blog
 
 class Home(Resource):
