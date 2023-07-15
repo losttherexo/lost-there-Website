@@ -8,6 +8,7 @@ class Show(db.Model):
     venue = db.Column(db.String(64), nullable=False)
     location = db.Column(db.String(64), nullable=False)
     date = db.Column(db.DateTime, nullable=False)
+    link = db.Column(db.String, nullable=False)
 
     def __repr__(self):
         return f'Show {self.id}: Live at {self.venue} on {self.date}'
