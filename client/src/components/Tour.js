@@ -1,22 +1,19 @@
+import { useState, useEffect } from "react"
 import TourDate from "./TourDate"
 
-
 const Tour = () => {
-
-    const tourDates = [
-        {
-            id:1,
-            date: "MAR 25, 2023",
-            location: "Iron Cow Sushi",
-            link: "Get Tickets"
-        },
-        {
-            id:2,
-            date: "JUN 08, 2023",
-            location: "Will's Pub",
-            link: "Get Tickets"
-        }
-    ]
+    const [tourDates, setTourDates] = useState([])
+    useEffect(() => {
+        fetch('/shows')
+        .then(r => {
+            if(r.ok){
+                return r.json()
+            } else {
+                throw new Error('Network response was not ok')
+            }
+        })
+        .then(data => setTourDates(data))
+    })
 
     const tourArray = tourDates.map(tourObj => <TourDate {...tourObj} key={tourObj.id}/>)
 
