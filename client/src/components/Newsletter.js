@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
 
-const Newsletter = ({isOpen, handleNewsletter, setQueue}) => {
+const Newsletter = ({isOpen, handleNewsletter}) => {
     const [email, setEmail] = useState('')
     const [consent, setConsent] = useState(false)
+    const [queue, setQueue] = useState([])
 
     const handleChange = (e) => {
         setEmail(e.target.value)
@@ -19,7 +20,7 @@ const Newsletter = ({isOpen, handleNewsletter, setQueue}) => {
     }
 
     return (
-        <div className='fixed self-center max-w-[75%] bg-white p-4 rounded'>
+        <div className=''>
             <form onSubmit={handleSubmit} className='flex flex-col'>
                 <button onClick={() => handleNewsletter()} className='absolute top-0 right-0 mr-2'>x</button>
                 <label htmlFor='email' className='font-medium'>Email</label>
