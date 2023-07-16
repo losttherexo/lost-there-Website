@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 const Newsletter = ({isOpen, handleNewsletter}) => {
     const [email, setEmail] = useState('')
@@ -12,6 +12,8 @@ const Newsletter = ({isOpen, handleNewsletter}) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         setQueue(e => [...e, email])
+        setEmail('')
+        setConsent(false)
         handleNewsletter()
     }
 
