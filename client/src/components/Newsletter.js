@@ -1,23 +1,18 @@
 import { useState, useEffect } from "react"
 
-const Newsletter = ({isOpen, handleNewsletter}) => {
+const Newsletter = ({isOpen, handleNewsletter, setQueue}) => {
     const [email, setEmail] = useState('')
     const [consent, setConsent] = useState(false)
-    const [queue, setQueue] = useState([])
 
     const handleChange = (e) => {
         setEmail(e.target.value)
     }
     
-    
     const handleSubmit = (e) => {
         e.preventDefault()
-        const newEmail = email
-        setQueue([...queue, newEmail])
+        setQueue(e => [...e, email])
         handleNewsletter()
     }
-
-    useEffect(() => {console.log(queue)}, [queue])
 
     if(!isOpen) {
         return null
