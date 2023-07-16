@@ -1,7 +1,8 @@
+from sqlalchemy_serializer import SerializerMixin
 from datetime import datetime
 from config import db
 
-class Show(db.Model):
+class Show(db.Model, SerializerMixin):
     __tablename__ = 'shows'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -13,7 +14,7 @@ class Show(db.Model):
     def __repr__(self):
         return f'Show {self.id}: Live at {self.venue} on {self.date}'
     
-class Blog(db.Model):
+class Blog(db.Model, SerializerMixin):
     __tablename__ = 'blog_posts'
 
     id = db.Column(db.Integer, primary_key=True)
