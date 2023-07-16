@@ -1,30 +1,30 @@
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 
 const Newsletter = ({isOpen, handleNewsletter}) => {
     const [email, setEmail] = useState('')
     const [consent, setConsent] = useState(false)
     const [queue, setQueue] = useState([])
 
+    useEffect(() => console.log(queue), [queue])
+
     const handleChange = (e) => {
         setEmail(e.target.value)
     }
     
-    
     const handleSubmit = (e) => {
         e.preventDefault()
-        const newEmail = email
-        setQueue([...queue, newEmail])
+        setQueue(e => [...e, email])
+        setEmail('')
+        setConsent(false)
         handleNewsletter()
     }
-
-    useEffect(() => {console.log(queue)}, [queue])
 
     if(!isOpen) {
         return null
     }
 
     return (
-        <div className='fixed self-center max-w-[75%] bg-white p-4 rounded'>
+        <div className=''>
             <form onSubmit={handleSubmit} className='flex flex-col'>
                 <button onClick={() => handleNewsletter()} className='absolute top-0 right-0 mr-2'>x</button>
                 <label htmlFor='email' className='font-medium'>Email</label>
