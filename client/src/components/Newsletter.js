@@ -1,9 +1,11 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const Newsletter = ({isOpen, handleNewsletter}) => {
     const [email, setEmail] = useState('')
     const [consent, setConsent] = useState(false)
     const [queue, setQueue] = useState([])
+
+    useEffect(() => console.log(queue), [queue])
 
     const handleChange = (e) => {
         setEmail(e.target.value)
