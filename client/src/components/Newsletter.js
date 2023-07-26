@@ -37,8 +37,10 @@ const Newsletter = ({isOpen, handleNewsletter}) => {
             <form onSubmit={formik.handleSubmit} className='flex flex-col'>
                 <button onClick={() => handleNewsletter()} className='absolute top-0 right-0 mr-2'>x</button>
                 <label htmlFor='email' className='font-medium'>Email</label>
-                <input placeholder='Type your email' name='email' onChange={formik.handleChange} value={formik.values.email} className='my-2 border rounded-sm' />
-                {formik.errors.email ? <div>{formik.errors.email}</div> : null}
+                <input placeholder='Type your email' name='email' onChange={formik.handleChange} value={formik.values.email} onBlur={formik.handleBlur} className='my-2 border rounded-sm' />
+                {formik.touched.email && formik.errors.email ? (
+                    <div>{formik.errors.email}</div>
+                ) : null}
                 <p className='font-medium'>I consent to being contacted by email</p>
                 <div className=''>
                     <input onClick={() => {}} type='checkbox' name='consent' />
