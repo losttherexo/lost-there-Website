@@ -6,16 +6,27 @@ const Newsletter = ({isOpen, handleNewsletter}) => {
 
     useEffect(() => console.log(queue), [queue])
 
+    const validate = values => {
+        const errors = {}
+
+        if (!values.email) {
+          errors.email = 'Required'
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+          errors.email = 'Invalid email address'
+        }
+      
+        return errors
+    }
+
     const formik = useFormik({
         initialValues: {
             email: '',
         },
+        validate,
         onSubmit: values => {
             setQueue([...queue, values])
           },
     })
-
-
 
     if(!isOpen) {
         return null
@@ -27,6 +38,7 @@ const Newsletter = ({isOpen, handleNewsletter}) => {
                 <button onClick={() => handleNewsletter()} className='absolute top-0 right-0 mr-2'>x</button>
                 <label htmlFor='email' className='font-medium'>Email</label>
                 <input placeholder='Type your email' name='email' onChange={formik.handleChange} value={formik.values.email} className='my-2 border rounded-sm' />
+                {formik.errors.email ? <div>{formik.errors.email}</div> : null}
                 <p className='font-medium'>I consent to being contacted by email</p>
                 <div className=''>
                     <input onClick={() => {}} type='checkbox' name='consent' />
