@@ -10,6 +10,7 @@ const Newsletter = ({isOpen, handleNewsletter}) => {
     const formik = useFormik({
         initialValues: {
             email: '',
+            consent: false,
         },
         validationSchema: Yup.object({
             email: Yup.string().email('Invalid email address').required('Required'),
@@ -34,7 +35,7 @@ const Newsletter = ({isOpen, handleNewsletter}) => {
                 ) : null}
                 <p className='font-medium'>I consent to being contacted by email</p>
                 <div className=''>
-                    <input onClick={() => {}} type='checkbox' name='consent' />
+                    <input onClick={formik.handleChange} type='checkbox' name='consent' value={formik.values.consent} />
                     <label htmlFor='consent' className='px-2'>Yes</label>
                 </div>
                 <button type='submit' className='bg-lime-500 rounded-md my-2 max-w-[25%] px-2 self-center'>Submit</button>
