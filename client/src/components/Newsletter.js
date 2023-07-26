@@ -1,24 +1,25 @@
 import { useEffect, useState } from "react"
+import {useFormik} from "formik"
+import * as Yup from "yup"
 
 const Newsletter = ({isOpen, handleNewsletter}) => {
-    const [email, setEmail] = useState('')
-    const [consent, setConsent] = useState(false)
     const [queue, setQueue] = useState([])
 
     useEffect(() => console.log(queue), [queue])
 
-    const handleChange = (e) => {
-        setEmail(e.target.value)
-    }
-    
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        (consent ? setQueue(e => [...e, email]) : null)
-        setQueue(e => [...e, email])
-        setEmail('')
-        setConsent(false)
-        handleNewsletter()
-    }
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            consent: false,
+        },
+        validationSchema: Yup.object({
+            email: Yup.string().email('Invalid email address.').required('This field is required.'),
+            consent: Yup.boolean().oneOf([true], "Please select an option."),
+          }),
+        onSubmit: values => {
+            setQueue([...queue, values])
+          },
+    })
 
     if(!isOpen) {
         return null
@@ -26,15 +27,21 @@ const Newsletter = ({isOpen, handleNewsletter}) => {
 
     return (
         <div className=''>
-            <form onSubmit={handleSubmit} className='flex flex-col'>
+            <form onSubmit={formik.handleSubmit} className='flex flex-col'>
                 <button onClick={() => handleNewsletter()} className='absolute top-0 right-0 mr-2'>x</button>
                 <label htmlFor='email' className='font-medium'>Email</label>
-                <input placeholder='Type your email' name='email' onChange={handleChange} className='my-2 border rounded-sm' />
+                <input placeholder='Type your email' name='email' onChange={formik.handleChange} value={formik.values.email} onBlur={formik.handleBlur} className='my-2 border rounded-sm' />
+                {formik.touched.email && formik.errors.email ? (
+                    <div className="text-red-500">{formik.errors.email}</div>
+                ) : null}
                 <p className='font-medium'>I consent to being contacted by email</p>
                 <div className=''>
-                    <input onClick={() => setConsent(!consent)} type='checkbox' name='consent' />
+                    <input onClick={formik.handleChange} type='checkbox' name='consent' value={formik.values.consent} />
                     <label htmlFor='consent' className='px-2'>Yes</label>
                 </div>
+                {formik.touched.consent && formik.errors.consent ? (
+                    <div className="text-red-500">{formik.errors.consent}</div>
+                ) : null}
                 <button type='submit' className='bg-lime-500 rounded-md my-2 max-w-[25%] px-2 self-center'>Submit</button>
             </form>
         </div>
