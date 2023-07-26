@@ -13,6 +13,7 @@ const Newsletter = ({isOpen, handleNewsletter}) => {
     
     const handleSubmit = (e) => {
         e.preventDefault()
+        (consent ? setQueue(e => [...e, email]) : null)
         setQueue(e => [...e, email])
         setEmail('')
         setConsent(false)
