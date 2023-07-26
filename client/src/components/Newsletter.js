@@ -2,16 +2,16 @@ import { useEffect, useState } from "react"
 import {useFormik} from "formik"
 
 const Newsletter = ({isOpen, handleNewsletter}) => {
-    // const [queue, setQueue] = useState([])
+    const [queue, setQueue] = useState([])
 
-    // useEffect(() => console.log(queue), [queue])
+    useEffect(() => console.log(queue), [queue])
 
     const formik = useFormik({
         initialValues: {
             email: '',
         },
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+            setQueue([...queue, values])
           },
     })
 
