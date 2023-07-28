@@ -35,13 +35,13 @@ const Newsletter = ({isOpen, handleNewsletter}) => {
                     <div className="text-red-500">{formik.errors.email}</div>
                 ) : null}
                 <p className='font-medium'>I consent to being contacted by email</p>
+                {formik.touched.consent && formik.errors.consent ? (
+                    <div className="text-red-500">{formik.errors.consent}</div>
+                ) : null}
                 <div className=''>
                     <input onClick={formik.handleChange} type='checkbox' name='consent' value={formik.values.consent} />
                     <label htmlFor='consent' className='px-2'>Yes</label>
                 </div>
-                {formik.touched.consent && formik.errors.consent ? (
-                    <div className="text-red-500">{formik.errors.consent}</div>
-                ) : null}
                 <button type='submit' className='bg-lime-500 rounded-md my-2 max-w-[25%] px-2 self-center'>Submit</button>
             </form>
         </div>
