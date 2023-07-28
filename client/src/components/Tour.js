@@ -13,7 +13,7 @@ const Tour = () => {
             }
         })
         .then(data => setTourDates(data))
-    })
+    },[])
 
     const tourArray = tourDates.map(tourObj => <TourDate {...tourObj} key={tourObj.id}/>)
 
