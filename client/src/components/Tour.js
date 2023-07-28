@@ -1,18 +1,15 @@
 import { useState, useEffect } from "react"
 import TourDate from "./TourDate"
+import axios from "axios"
 
 const Tour = () => {
     const [tourDates, setTourDates] = useState([])
+
     useEffect(() => {
-        fetch('/shows')
-        .then(r => {
-            if(r.ok){
-                return r.json()
-            } else {
-                throw new Error('Network response was not ok')
-            }
-        })
-        .then(data => setTourDates(data))
+        axios
+            .get('/shows')
+            .then(response => {setTourDates(response.data)})
+            .catch(error => {console.error("Error fetching tour dates:", error)})
     },[])
 
     const tourArray = tourDates.map(tourObj => <TourDate {...tourObj} key={tourObj.id}/>)
