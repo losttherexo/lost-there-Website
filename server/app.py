@@ -3,9 +3,7 @@ from flask_restful import Resource
 
 from config import app, db, api, mailchimp
 from models import Show, Blog
-
-response = mailchimp.ping.get()
-print(response)
+from mailchimp_marketing.api_client import ApiClientError
 
 email_queue = []
 
@@ -21,11 +19,15 @@ class Newsletter(Resource):
 
             print(email_queue)
 
+
+
             response = make_response('Emails added to newsletter!', 200)
             return response
+
         except Exception as e:
-            response = make_response(f'error: {str(e)}', 500)
+            response = make_response(f'Error: {str(e)}', 500)
             return response
+
         
 class Shows(Resource):
     def get(self):
