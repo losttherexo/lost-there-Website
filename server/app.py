@@ -8,6 +8,11 @@ from models import Show, Blog
 from mailchimp_marketing.api_client import ApiClientError
 
 email_queue = []
+last_batch_time = time.time()
+
+def time_since_last_batch():
+    global last_batch_time
+    return time.time() - last_batch_time
 
 class Home(Resource):
     def get(self):
