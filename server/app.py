@@ -15,13 +15,17 @@ class Newsletter(Resource):
     def post(self):
         try:
             new_email = request.get_json()
-            email_queue.append(new_email)
+            new_member = {
+                "email_address": new_email['email'],
+                "status": "subscribed"
+            }
+            email_queue.append(new_member)
 
-            print(new_email)
-
-            # batch = mailchimp.lists.batch_list_members("1eaa849ef3", {"members": email_queue})
-            # print(batch)
-
+            try:
+                mailchimp.lists.batch_list_members("1eaa849ef3", {"members": email_queue}, skip_merge_validation=True)
+            except ApiClientError as e:
+                print("Error: {}".format(e.text))
+    
             response = make_response('Emails added to newsletter!', 200)
             return response
 
