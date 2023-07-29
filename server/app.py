@@ -8,6 +8,7 @@ from models import Show, Blog
 from mailchimp_marketing.api_client import ApiClientError
 
 email_queue = []
+operations = []
 last_batch_time = time.time()
 
 def time_since_last_batch():
@@ -24,7 +25,6 @@ class Newsletter(Resource):
             new_email = request.get_json()
             email_queue.append(new_email)
 
-            operations = []
             for email in email_queue:
                 operation = {
                     "method": "POST",
@@ -40,8 +40,12 @@ class Newsletter(Resource):
                 "operations": operations
             }
 
-            if len(operations) >= 500 or :
+            if len(operations) >= 500 or time_since_last_batch() >= 60:
                 mailchimp.batches.start(payload)
+                global last_batch_time
+                last_batch_time = time.time()
+                email_queue.clear()
+                operations.clear()
     
             response = make_response('Emails added to newsletter!', 200)
             return response
