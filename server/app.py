@@ -13,7 +13,15 @@ class Home(Resource):
     
 class Newsletter(Resource):
     def post(self):
-        pass
+        try:
+            data = request.get_json()
+            emails = data.get('emails', [])
+
+            response = make_response('Emails added to newsletter!', 200)
+            return response
+        except Exception as e:
+            response = make_response(f'error: {str(e)}', 500)
+            return jsonify({"error": str(e)}), 500
     
 class Shows(Resource):
     def get(self):
