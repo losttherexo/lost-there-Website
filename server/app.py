@@ -7,6 +7,8 @@ from models import Show, Blog
 response = mailchimp.ping.get()
 print(response)
 
+email_queue = []
+
 class Home(Resource):
     def get(self):
         return 'how did i get here?'
@@ -14,19 +16,17 @@ class Home(Resource):
 class Newsletter(Resource):
     def post(self):
         try:
-            emails = []
-
             new_email = request.get_json()
-            emails.append(new_email)
-            
-            print(emails)
+            email_queue.append(new_email)
+
+            print(email_queue)
 
             response = make_response('Emails added to newsletter!', 200)
             return response
         except Exception as e:
             response = make_response(f'error: {str(e)}', 500)
-            return jsonify({"error": str(e)}), 500
-    
+            return response
+        
 class Shows(Resource):
     def get(self):
         shows = [s.to_dict() for s in Show.query.all()]
