@@ -1,7 +1,7 @@
 from flask import request, make_response, session, abort, jsonify
 from flask_restful import Resource
 
-from config import app, db, api, mailchimp
+from config import app, db, api, mailchimp, list_id
 from models import Show, Blog
 from mailchimp_marketing.api_client import ApiClientError
 
@@ -22,7 +22,7 @@ class Newsletter(Resource):
             email_queue.append(new_member)
 
             try:
-                mailchimp.lists.batch_list_members("1eaa849ef3", {"members": email_queue}, skip_merge_validation=True)
+                mailchimp.lists.batch_list_members(list_id, {"members": email_queue}, skip_merge_validation=True)
             except ApiClientError as e:
                 print("Error: {}".format(e.text))
     

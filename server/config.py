@@ -11,6 +11,7 @@ from mailchimp_marketing import Client
 load_dotenv()
 marketing_key = os.getenv('MARKETING_KEY')
 server_prefix = os.getenv('SERVER_PREFIX')
+list_id = os.getenv('LIST_ID')
 
 mailchimp = Client()
 mailchimp.set_config({
