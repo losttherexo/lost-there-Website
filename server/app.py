@@ -14,8 +14,12 @@ class Home(Resource):
 class Newsletter(Resource):
     def post(self):
         try:
-            data = request.get_json()
-            emails = data.get('emails', [])
+            emails = []
+
+            new_email = request.get_json()
+            emails.append(new_email)
+            
+            print(emails)
 
             response = make_response('Emails added to newsletter!', 200)
             return response

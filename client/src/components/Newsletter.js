@@ -1,9 +1,8 @@
-import { useState } from "react"
 import {useFormik} from "formik"
 import * as Yup from "yup"
+import axios from "axios"
 
 const Newsletter = ({isOpen, handleNewsletter}) => {
-    const [queue, setQueue] = useState([])
 
     const formik = useFormik({
         initialValues: {
@@ -14,8 +13,8 @@ const Newsletter = ({isOpen, handleNewsletter}) => {
             email: Yup.string().email('Invalid email address.').required('This field is required.'),
             consent: Yup.boolean().oneOf([true], "Please select an option."),
           }),
-        onSubmit: (values, {resetForm}) => {
-            setQueue([...queue, values])
+        onSubmit: async (values, {resetForm}) => {
+            await axios.post('/email_list', values)
             resetForm()
             handleNewsletter()
           },
