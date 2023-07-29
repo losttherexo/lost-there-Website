@@ -22,8 +22,8 @@ class Home(Resource):
 class Newsletter(Resource):
     def post(self):
         try:
-            new_email = request.get_json()
-            email_queue.append(new_email)
+            data = request.get_json()
+            email_queue.append(data)
 
             for email in email_queue:
                 operation = {
@@ -47,7 +47,7 @@ class Newsletter(Resource):
                 email_queue.clear()
                 operations.clear()
     
-            response = make_response('Emails added to newsletter!', 200)
+            response = make_response('Emails added to newsletter!', 201)
             return response
 
         except Exception as e:
@@ -68,6 +68,27 @@ class Blogs(Resource):
 
         response = make_response(blogs, 200)
         return response
+    
+    def post(self):
+        try:
+            data = request.get_json()
+            title = data.get('title')
+            content = data.get('content')
+
+            if not title or not content:
+                response = make_response("error': 'Title and content are required fields.", 400)
+                return response
+            
+            new_blog_post = Blog(title=title, content=content)
+            db.session.add(new_blog_post)
+            db.session.commit()
+
+            response = make_response('Blog posted!', 201)
+            return response
+        
+        except Exception as e:
+            response = make_response(f'Error: {str(e)}', 500)
+            return response
 
 api.add_resource(Home, '/')
 api.add_resource(Shows, '/shows')
