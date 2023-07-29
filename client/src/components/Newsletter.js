@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import {useFormik} from "formik"
 import * as Yup from "yup"
 
 const Newsletter = ({isOpen, handleNewsletter}) => {
     const [queue, setQueue] = useState([])
-
-    useEffect(() => console.log(queue), [queue])
 
     const formik = useFormik({
         initialValues: {
@@ -16,8 +14,10 @@ const Newsletter = ({isOpen, handleNewsletter}) => {
             email: Yup.string().email('Invalid email address.').required('This field is required.'),
             consent: Yup.boolean().oneOf([true], "Please select an option."),
           }),
-        onSubmit: values => {
+        onSubmit: (values, {resetForm}) => {
             setQueue([...queue, values])
+            resetForm()
+            handleNewsletter()
           },
     })
 
