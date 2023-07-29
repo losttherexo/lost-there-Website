@@ -1,3 +1,5 @@
+import json
+import time
 from flask import request, make_response, session, abort, jsonify
 from flask_restful import Resource
 
@@ -15,16 +17,26 @@ class Newsletter(Resource):
     def post(self):
         try:
             new_email = request.get_json()
-            new_member = {
-                "email_address": new_email['email'],
-                "status": "subscribed"
-            }
-            email_queue.append(new_member)
+            email_queue.append(new_email)
 
-            try:
-                mailchimp.lists.batch_list_members(list_id, {"members": email_queue}, skip_merge_validation=True)
-            except ApiClientError as e:
-                print("Error: {}".format(e.text))
+            operations = []
+            for email in email_queue:
+                operation = {
+                    "method": "POST",
+                    "path": f"/lists/{list_id}/members",
+                    "body": json.dumps({
+                        "email_address": email['email'],
+                        "status": "subscribed"
+                    })
+                }
+                operations.append(operation)
+
+            payload = {
+                "operations": operations
+            }
+
+            if len(operations) >= 500 or :
+                mailchimp.batches.start(payload)
     
             response = make_response('Emails added to newsletter!', 200)
             return response
