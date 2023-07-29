@@ -17,9 +17,10 @@ class Newsletter(Resource):
             new_email = request.get_json()
             email_queue.append(new_email)
 
-            print(email_queue)
+            print(new_email)
 
-
+            # batch = mailchimp.lists.batch_list_members("1eaa849ef3", {"members": email_queue})
+            # print(batch)
 
             response = make_response('Emails added to newsletter!', 200)
             return response
