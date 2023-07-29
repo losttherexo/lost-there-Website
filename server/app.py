@@ -40,6 +40,7 @@ class Blogs(Resource):
 api.add_resource(Home, '/')
 api.add_resource(Shows, '/shows')
 api.add_resource(Blogs, '/blogs')
+api.add_resource(Newsletter, '/email_list')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
