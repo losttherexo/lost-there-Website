@@ -3,7 +3,7 @@ import {FaInstagram, FaYoutube, FaSpotify, FaMusic} from 'react-icons/fa'
 const Footer = () => {
     return (
         <footer>
-            <div className='fixed bottom-0 w-full text-white text-xl flex justify-center py-3'>
+            <div className='fixed bottom-0 w-full text-lime-500 text-2xl flex justify-center mb-1 py-3'>
                 <a className='mx-2' href='https://www.instagram.com/lostthere.xo/'><FaInstagram /></a>
                 <a className='mx-2' href='https://www.youtube.com/@losttherexo'><FaYoutube /></a>
                 <a className='mx-2' href='https://open.spotify.com/artist/27dTdSe8fBtCAle3kuMaOB?si=Erbf1WdZRlWreNLSuR7LIA'><FaSpotify /></a>
