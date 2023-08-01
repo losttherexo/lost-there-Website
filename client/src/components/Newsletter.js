@@ -25,10 +25,10 @@ const Newsletter = ({isOpen, handleNewsletter}) => {
     }
 
     return (
-        <div className='text-white'>
+        <div className='text-lime-500'>
             <form onSubmit={formik.handleSubmit} className='flex flex-col'>
                 <button onClick={() => handleNewsletter()} className='absolute top-0 right-0 mr-2'>x</button>
-                <label htmlFor='email' className='font-medium'>Email</label>
+                <label htmlFor='email' className='text-2xl font-medium'>Email</label>
                 <input placeholder='Type your email' name='email' onChange={formik.handleChange} value={formik.values.email} onBlur={formik.handleBlur} className='my-2 border rounded-sm' />
                 {formik.touched.email && formik.errors.email ? (
                     <div className="text-red-500">{formik.errors.email}</div>
@@ -41,7 +41,7 @@ const Newsletter = ({isOpen, handleNewsletter}) => {
                     <input onClick={formik.handleChange} type='checkbox' name='consent' value={formik.values.consent} />
                     <label htmlFor='consent' className='px-2'>Yes</label>
                 </div>
-                <button type='submit' className='bg-lime-500 rounded-md my-2 max-w-[25%] px-2 self-center'>Submit</button>
+                <button type='submit' className='bg-lime-500 rounded-md my-2 max-w-[25%] px-2 self-center text-black'>Submit</button>
             </form>
         </div>
     )
