@@ -5,6 +5,7 @@ import About from './components/About';
 import Blog from './components/Blog'
 import Tour from './components/Tour';
 import {Route, Switch } from 'react-router-dom'
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <About />
         </Route>
       </Switch>
+      <div><Footer /></div>
     </div>
   );
 }
