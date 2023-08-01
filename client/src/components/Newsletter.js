@@ -25,7 +25,7 @@ const Newsletter = ({isOpen, handleNewsletter}) => {
     }
 
     return (
-        <div className=''>
+        <div className='text-white'>
             <form onSubmit={formik.handleSubmit} className='flex flex-col'>
                 <button onClick={() => handleNewsletter()} className='absolute top-0 right-0 mr-2'>x</button>
                 <label htmlFor='email' className='font-medium'>Email</label>
